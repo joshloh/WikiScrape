@@ -28,3 +28,4 @@ TO CUSTOMISE:
 - Depth limit can be modified by changing dfs call parameters
 - Search page is currently hard-coded. Can change by searching for every instance of "Adolf Hitler" and changing to the desired search article
 	- This will be made easier in future versions, most liely as an additional argument
+- To run BFS, comment out the DFS call and uncomment the BFS call
