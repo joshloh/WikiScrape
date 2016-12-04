@@ -1,0 +1,86 @@
++------------------------------
+| Projects
++------------------------------
+
+- Single-input Based Game
+	- Events
+	Adv:
+		- Simple
+		- Can be easily incremented/good deliverable/milestones
+		- Can be modified into different projects
+	Disadv:
+		- Threads
+		- Final product relies on a lot of non-programming stuff like art and music
+
+- Webscraping Lyrics
+	- Web app
+	- How to use APIs
+	Adv:
+		- First time doing proper web stuff
+		- Potentially super useful
+	Disadv:
+		- 3rd party software is prone to breaking
+
+- 2D Game Prototype
+	- Map generation algorithms
+	- Graphics 
+	- Events
+	Adv:
+		- More opportunity to learn compared to single-input
+		- Can be easily incremented/good deliverable/milestones
+		- Can be modified into different projects
+	Disadv:
+		- Threads
+		- Final product relies on a lot of non-programming stuff like art and music
+
+- Smart Flash Cards
+	- Priotity queues
+	- Probability & Statistics
+	- Can be done with multiple different algorithms
+	Adv:
+		- Simple
+	Disadv:
+		- Not likely to be useful
+		- Difficult to expand on/deliverables aren't as incremental
+
+- Social Media Bots
+	- Reddit, Twitter, Discord
+	- APIs
+	Adv:
+		- Fun
+		- Flexible/many languages
+		- Potentially useful
+	Disadv:
+		- If usefulness is a goal, competition
+		- Easy to break
+		- File structure can end up being messy
+
++------------------------------
+| Algorithms
++------------------------------
+
+- Neural Networks
+- LPA*
+- D*Lite
+- K-means
+- Clustering
+- KD Trees
+- Robot Localisation
+- Minimax/AB pruning
+- AVL Trees
+
++------------------------------
+| Languages
++------------------------------
+
+- C++
+- Java
+- Python
+- Web
+	- HTML
+	- Javascript
+	- CSS
+	- PHP
+	- Json
+	- Node.js
+- Ruby
