@@ -1,7 +1,7 @@
 # WikiScrape Project changelog
 - Authors: Denton Phosavanh Joshua Loh
 - For: Self-improvement
-- Latest Version: 0.1.0
+- Latest Version: 0.1.1
 ---
 ## GLOSSARY
 [x] - currently not used
@@ -13,6 +13,7 @@
 - Implement flags for switching on/off output
 - Make an array of potential end cases instead of a fixed number
 - Some kind of output for BFS to see the path from start to beginning
+- Prevent the consideration of pages such as `https://en.wikipedia.org/wiki/Germany#Law` and `https://en.wikipedia.org/wiki/Germany#Music` as "different" pages
 
 ### Known bugs
 - ~~Pages with "Wikipedia:" and "Help:" being included in the outgoing link list when they shouldn't be~~	
