@@ -14,6 +14,7 @@
 - Make an array of potential end cases instead of a fixed number
 - Some kind of output for BFS to see the path from start to beginning
 - Prevent the consideration of pages such as `https://en.wikipedia.org/wiki/Germany#Law` and `https://en.wikipedia.org/wiki/Germany#Music` as "different" pages
+- Only parsing relevant parts of each page as per https://www.crummy.com/software/BeautifulSoup/bs4/doc/#parsing-only-part-of-a-document Should boost efficiency significantly
 
 ### Known bugs
 - ~~Pages with "Wikipedia:" and "Help:" being included in the outgoing link list when they shouldn't be~~	
