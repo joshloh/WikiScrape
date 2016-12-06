@@ -1,7 +1,7 @@
 # WikiScrape Project changelog
 - Authors: Denton Phosavanh Joshua Loh
 - For: Self-improvement
-- Latest Version: 0.1.1
+- Latest Version: 0.2.1
 ---
 ## GLOSSARY
 [x] - currently not used
@@ -14,12 +14,19 @@
 - Make an array of potential end cases instead of a fixed number
 - Some kind of output for BFS to see the path from start to beginning
 - Prevent the consideration of pages such as `https://en.wikipedia.org/wiki/Germany#Law` and `https://en.wikipedia.org/wiki/Germany#Music` as "different" pages
-- Only parsing relevant parts of each page as per https://www.crummy.com/software/BeautifulSoup/bs4/doc/#parsing-only-part-of-a-document Should boost efficiency significantly
 
 ### Known bugs
 - ~~Pages with "Wikipedia:" and "Help:" being included in the outgoing link list when they shouldn't be~~	
 
-## [0.1.1] - 2016-12-05
+## [0.2.1] - 2016-12-06
+### Added
+- SoupStrainer optimisation
+	- SoupStrainer extracts only `<p>` tags, `find_all()` still used for `<a>` tags
+
+### Changed
+- Removed target in DFS (just commented out for now)
+
+## [0.2.0] - 2016-12-05
 ### Added
 - BFS implementation
 	- The current BFS implementation searches for "Aboriginal_peoples_in_Canada" (from "Sun_Dance")

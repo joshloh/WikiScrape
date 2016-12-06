@@ -5,6 +5,7 @@
 
 import urllib2
 from bs4 import BeautifulSoup
+from bs4 import SoupStrainer
 import sys
 from Queue import *
 
@@ -15,27 +16,28 @@ def streamline(a):
 	return a
 
 # From a string in the form of "Wikipedia_Article_Name",
-# create the BeaitifuilSoup object of it, and return
+# create the BeautifulSoup object of it, and return
 # a list of all the links that it contains
 def get_links(s):
 	# Set up the scraper
 	wiki = "https://en.wikipedia.org/wiki/" + s
 	page = urllib2.urlopen(wiki)
-	soup = BeautifulSoup(page, "html.parser")
+	# soup = BeautifulSoup(page, "html.parser")
+	soup = BeautifulSoup(page, "html.parser", parse_only=SoupStrainer("p"))
 
 	# Stores the name of all the outgoing Wiki pages
 	link_array = []
 
 	# Extract every <a> that is in a <p>, store them in link_array
-	every_para = soup.find_all("p")
-	for para in every_para:
-		# print para.get_text()
-		para_links = para.find_all("a")
-		for para_link in para_links:
-			link = para_link.get("href")
-			# Only pull (relevant parts of) relevant pages
-			if link.startswith("/wiki/") and (link[6:].startswith("Wikipedia:") == False) and (link[6:].startswith("Help:") == False):
-				link_array.append(link[6:])
+	# every_para = soup.find_all("p")
+	# for para in every_para:
+	# 	# print para.get_text()
+	para_links = soup.find_all("a")
+	for para_link in para_links:
+		link = para_link.get("href")
+		# Only pull (relevant parts of) relevant pages
+		if link.startswith("/wiki/") and (link[6:].startswith("Wikipedia:") == False) and (link[6:].startswith("Help:") == False):
+			link_array.append(link[6:])
 
 	# Return link_array
 	return streamline(link_array)
@@ -44,11 +46,12 @@ def get_links(s):
 def dfs(s, depth, DEPTH_LIMIT):
 	# Base cases, have reached depth limit, or found Hitler
 	if depth >= DEPTH_LIMIT:
-		exit(11)
-	elif s == "Adolf_Hitler" or s == "Hitler":
-		print("YEAH YEAH YEAH YEAH YEAH YEAH YEAH")
-		print("Got to " + s + " at depth " + str(depth))
-		exit(12)
+		return
+		# exit(11)
+	# elif s == "Adolf_Hitler" or s == "Hitler":
+	# 	print("YEAH YEAH YEAH YEAH YEAH YEAH YEAH")
+	# 	print("Got to " + s + " at depth " + str(depth))
+	# 	exit(12)
 
 	indent = "\t"*depth
 	print indent + "Visiting: " + s
@@ -61,9 +64,9 @@ def dfs(s, depth, DEPTH_LIMIT):
 
 	# Shortcut search for Hitler
 	global visited_links
-	for l in link_array:
-		if l == "Adolf_Hitler" or l == "Hitler":
-			dfs(l, depth+1, DEPTH_LIMIT)
+	# for l in link_array:
+	# 	if l == "Adolf_Hitler" or l == "Hitler":
+	# 		dfs(l, depth+1, DEPTH_LIMIT)
 
 	# recursion
 	# Another sneaky base case
