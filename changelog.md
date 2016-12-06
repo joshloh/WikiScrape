@@ -20,6 +20,9 @@
 - ~~Pages are pre-emptively added to `visited_links` so they aren't explored properly in DFS~~
 
 ## [0.2.2] - 2016-12-06
+## Added
+- Extra parameter in main, used for DFS depth
+
 ### Changed
 - Fixed DFS bug (moved adding to visited_links to earlier in the function)
 

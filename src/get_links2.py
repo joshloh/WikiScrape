@@ -101,13 +101,13 @@ def bfs(s):
 #| main
 #+-------------------------------
 # If no argument is passed, exit
-if len(sys.argv) < 2:
+if len(sys.argv) < 3:
 	print "Error, invalid number of arguments."
-	print "Example usage: " + sys.argv[0] + " Article_Name"
+	print "Example usage: " + sys.argv[0] + " [Article_Name] [DFS_DEPTH]"
 	sys.exit()
 
 # Keep track of which links have been visited
 visited_links = set()
 visited_links.add(sys.argv[1])
-dfs(sys.argv[1], 0, 2)
+dfs(sys.argv[1], 0, int(sys.argv[2]))
 # bfs(sys.argv[1])
