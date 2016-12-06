@@ -52,7 +52,8 @@ def dfs(s, depth, DEPTH_LIMIT):
 	# 	print("YEAH YEAH YEAH YEAH YEAH YEAH YEAH")
 	# 	print("Got to " + s + " at depth " + str(depth))
 	# 	exit(12)
-
+	global visited_links
+	visited_links.add(s)
 	indent = "\t"*depth
 	print indent + "Visiting: " + s
 
@@ -63,7 +64,6 @@ def dfs(s, depth, DEPTH_LIMIT):
 		print(indent + l)
 
 	# Shortcut search for Hitler
-	global visited_links
 	# for l in link_array:
 	# 	if l == "Adolf_Hitler" or l == "Hitler":
 	# 		dfs(l, depth+1, DEPTH_LIMIT)
@@ -72,7 +72,6 @@ def dfs(s, depth, DEPTH_LIMIT):
 	# Another sneaky base case
 	for l in link_array:
 		if not l in visited_links:
-			visited_links.add(l)
 			dfs(l, depth+1, DEPTH_LIMIT)
 
 def bfs(s):
@@ -110,5 +109,5 @@ if len(sys.argv) < 2:
 # Keep track of which links have been visited
 visited_links = set()
 visited_links.add(sys.argv[1])
-dfs(sys.argv[1], 0, 1)
+dfs(sys.argv[1], 0, 2)
 # bfs(sys.argv[1])

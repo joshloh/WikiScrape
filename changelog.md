@@ -16,7 +16,12 @@
 - Prevent the consideration of pages such as `https://en.wikipedia.org/wiki/Germany#Law` and `https://en.wikipedia.org/wiki/Germany#Music` as "different" pages
 
 ### Known bugs
-- ~~Pages with "Wikipedia:" and "Help:" being included in the outgoing link list when they shouldn't be~~	
+- ~~Pages with "Wikipedia:" and "Help:" being included in the outgoing link list when they shouldn't be~~
+- ~~Pages are pre-emptively added to `visited_links` so they aren't explored properly in DFS~~
+
+## [0.2.2] - 2016-12-06
+### Changed
+- Fixed DFS bug (moved adding to visited_links to earlier in the function)
 
 ## [0.2.1] - 2016-12-06
 ### Added
