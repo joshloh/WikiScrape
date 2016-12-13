@@ -1,7 +1,7 @@
 # WikiScrape project readme file
 ## Requirements
-- Python 2.x
-- BeautifulSoup
+- Python 2.x OR Python 3.x
+- BeautifulSoup4
 	- Pip
 		- If using Cygwin, needs the `python-setuptools` package
 		- Install pip by running `easy_install-2.x pip` (where `2.x` is the Python2 version that is installed)
@@ -10,6 +10,7 @@
 ## Instructions
 - Download the repository
 - Run `python get_links2.py [WIKIPEDIA_ARTICLE_NAME]`
+- OR `python3 get_links2.py [WIKIPEDIA_ARTICLE_NAME]`
 - e.g. `python get_link2.py Sun_Dance`
 - This will search every outgoing link from Sun Dance recursively
 - Searches until

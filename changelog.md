@@ -23,8 +23,12 @@
 - ~~Pages with "Wikipedia:" and "Help:" being included in the outgoing link list when they shouldn't be~~
 - ~~Pages are pre-emptively added to `visited_links` so they aren't explored properly in DFS~~
 
+## [0.2.3] - 2016-12-13
+### Added
+- A Python3 port for `get_links3.py`
+
 ## [0.2.2] - 2016-12-06
-## Added
+### Added
 - Extra parameter in main, used for DFS depth
 
 ### Changed
