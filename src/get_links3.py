@@ -3,9 +3,13 @@
 # Denton Phosavanh
 # 2016
 
+# Webscraping
 import urllib.request, urllib.error, urllib.parse
 from bs4 import BeautifulSoup
 from bs4 import SoupStrainer
+
+# Other
+import argparse
 import sys
 from queue import *
 
@@ -97,17 +101,64 @@ def bfs(s):
 				visited_links.add(l)
 
 
+def argparse_setup():
+	parser = argparse.ArgumentParser()
+	
+	# Which search to use
+	parser.add_argument(
+		"-s", "--search",
+		default = "bfs",
+		choices = ["dfs", "bfs"],
+		help = "which search to use (default: bfs)"	
+	)
+	
+	# dfs depth
+	parser.add_argument(
+		"-d", "--depth",
+		default = 2,
+		type = int,
+		help = "the depth to which dfs should search (default = 2). use in conjunction with dfs)"
+	)
+	
+	parser.add_argument(
+		"-p", "--page",
+		default = "Sun_Dance",
+		help = "which page to start the search from (formatted to Wikipedia standards)"
+	)
+	
+	# Level of output
+	parser.add_argument(
+		"-v", "--verbosity",
+		default = 1,
+		type = int,
+		choices = [0, 1, 2, 3, 4, 5],
+		help = "the level of output to use (0 is low, 5 is high)"
+	)
+	
+	return parser
+	
 #+-------------------------------
 #| main
 #+-------------------------------
 # If no argument is passed, exit
-if len(sys.argv) < 3:
-	print("Error, invalid number of arguments.")
-	print("Example usage: " + sys.argv[0] + " [Article_Name] [DFS_DEPTH]")
-	sys.exit()
+# if len(sys.argv) < 3:
+	# print("Error, invalid number of arguments.")
+	# print("Example usage: " + sys.argv[0] + " [Article_Name] [DFS_DEPTH]")
+	# sys.exit()
+
+parser = argparse_setup()
+args = parser.parse_args()
+print(args)
 
 # Keep track of which links have been visited
 visited_links = set()
-visited_links.add(sys.argv[1])
-dfs(sys.argv[1], 0, int(sys.argv[2]))
+visited_links.add(args.page)
+
+if args.search == "dfs":
+	dfs(args.page, 0, args.depth)
+else:
+	bfs(args.page)
+	
+# visited_links.add(sys.argv[1])
+# dfs(sys.argv[1], 0, int(sys.argv[2]))
 # bfs(sys.argv[1])
