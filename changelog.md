@@ -1,7 +1,7 @@
 # WikiScrape Project changelog
 - Authors: Denton Phosavanh Joshua Loh
 - For: Self-improvement
-- Latest Version: 0.2.3
+- Latest Version: 0.3.0
 ---
 ## GLOSSARY
 [x] - currently not used
@@ -17,17 +17,34 @@
 	- Example: Running it on [this page](https://en.wikipedia.org/wiki/List_of_chemical_compounds_with_unusual_names) at depth 1 will only register 13 outgoing links, whereas there should be hundreds.
 	- As a side-note, we also want to avoid links in templates such as at the bottom of [this page](https://en.wikipedia.org/wiki/AK-102), so we need a way to distinguish between them
 - Use `argparse` package to parse arguments
-	- Allow user to specify "target" page (i.e. not restricted Hitler)
 	- Implement flags for switching on/off output
-
+	- Actually make use of the verbosity flag
 
 ### Known bugs
 - ~~Pages with "Wikipedia:" and "Help:" being included in the outgoing link list when they shouldn't be~~
 - ~~Pages are pre-emptively added to `visited_links` so they aren't explored properly in DFS~~
 
+## [0.3.0] - 2016-12-21
+### Added
+- Use of argparse to parse arguments. 
+	- Possible arguments:
+		- a/algorithm - which page to search for
+		- d/depth - how deep dfs should go
+		- s/start - start page of the search
+		- t/target - target page of the search
+		- v/verbosity - how much output should be made
+	- Added `description` and `epilog` fields for the argparse constructor
+- Exception handling inside `get_links` when creating `page`
+
+### Changed
+- Removed a bunch of commented out code and unused code
+- Added Denton to `LICENCE`
+
+
 ## [0.2.3] - 2016-12-13
 ### Added
 - A Python3 port for `get_links3.py`
+
 
 ## [0.2.2] - 2016-12-06
 ### Added
@@ -36,6 +53,7 @@
 ### Changed
 - Fixed DFS bug (moved adding to visited_links to earlier in the function)
 
+
 ## [0.2.1] - 2016-12-06
 ### Added
 - SoupStrainer optimisation
@@ -43,6 +61,7 @@
 
 ### Changed
 - Removed target in DFS (just commented out for now)
+
 
 ## [0.2.0] - 2016-12-05
 ### Added
@@ -53,6 +72,7 @@
 
 ### Changes
 - Uncommented sort, makes it easier to predict and interpret output
+
 
 ## [0.1.0] - 2016-12-05
 ### Added

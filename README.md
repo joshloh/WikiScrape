@@ -1,24 +1,32 @@
 # WikiScrape project readme file
 ## Requirements
-- Python 2.x OR Python 3.x
+- Python 2.x OR Python 3.x (our 2.x version is being discontinued, so Python 3.x preferred)
 - BeautifulSoup4
 	- Pip
 		- If using Cygwin, needs the `python-setuptools` package
-		- Install pip by running `easy_install-2.x pip` (where `2.x` is the Python2 version that is installed)
-		- Install BeautifulSoup by running `pip install beautifulsoup4`
+		- Install pip by running `easy_install-2.x pip` (where `2.x` is the Python2 version that is installed, or `3.x` if using `get_links3.py`)
+		- Install BeautifulSoup by running `pip install beautifulsoup4` or using `pip3`
 
 ## Instructions
+- **NOTE**: `get_links3.py` is the one we're rolling with. `get_links2.py` exists, but is no longer being worked on.
 - Download the repository
-- Run `python get_links2.py [WIKIPEDIA_ARTICLE_NAME]`
-- OR `python3 get_links2.py [WIKIPEDIA_ARTICLE_NAME]`
-- e.g. `python get_link2.py Sun_Dance`
-- This will search every outgoing link from Sun Dance recursively
-- Searches until
-	- it finds the Wikipedia article for the target page (currently hard-coded to Adolf Hitler)
-	- it reachesd the depth limit (currently hard-coded)
+- Run `python3 get_links3.py [-h] [-a {dfs,bfs}] [-d DEPTH] [-s START] [-t TARGET] [-v VERBOSITY]`
+- OR `python get_links2.py [-h] [-a {dfs,bfs}] [-d DEPTH] [-s START] [-t TARGET] [-v VERBOSITY]`
+- e.g. `python3 get_link3.py -s Sun_Dance -t Australia -a bfs`
+- Searches until every outgoing link from [START] until:
+	- it finds reaches the Wikipedia article for [TARGET]
+	- it reaches the [DEPTH] (if using dfs)
 	- there are no more unexplored articles to search
 	
-### Output
+- For argument help, run `python3 get_links3.py -h`
+
+- Exit status:
+	- 0: Everything worked as planned
+	- 2: Error parsing arguments
+	- 3: urllib.error.HTTPError
+	- 4: General exception from urllib.request
+	
+## Output
 - Prints to std output in the form of
 
 ```
@@ -37,9 +45,3 @@ Article Name
 
 etc.
 ```
-
-### To Customise
-- Depth limit can be modified by changing `dfs` call arguments
-- Target page is currently hard-coded. Can change by searching for every instance of "Adolf Hitler" and changing to the desired search article
-	- This will be made easier in future versions, most liely as an additional argument
-- To run BFS, comment out the DFS call and uncomment the BFS call (in main)
