@@ -1,7 +1,7 @@
 # WikiScrape Project changelog
 - Authors: Denton Phosavanh Joshua Loh
 - For: Self-improvement
-- Latest Version: 0.2.2
+- Latest Version: 0.2.3
 ---
 ## GLOSSARY
 [x] - currently not used
@@ -10,14 +10,16 @@
 
 ### Things to add or change
 - Run test cases on more pages
-- Implement flags for switching on/off output
 - Make an array of potential end cases instead of a fixed number
 - Some kind of output for BFS to see the path from start to beginning
-- Prevent the consideration of pages such as `https://en.wikipedia.org/wiki/Germany#Law` and `https://en.wikipedia.org/wiki/Germany#Music` as "different" pages
+- Prevent the consideration of pages such as [Germant#Law](https://en.wikipedia.org/wiki/Germany#Law) and [Germany#Music](https://en.wikipedia.org/wiki/Germany#Music) as "different" pages
 - Recognition of links within tables (and possibly other structures)
-	- Example: Running it on [this page](List_of_chemical_compounds_with_unusual_names) at depth 1 will only register 13 outgoing links, whereas there should be hundreds.
+	- Example: Running it on [this page](https://en.wikipedia.org/wiki/List_of_chemical_compounds_with_unusual_names) at depth 1 will only register 13 outgoing links, whereas there should be hundreds.
 	- As a side-note, we also want to avoid links in templates such as at the bottom of [this page](https://en.wikipedia.org/wiki/AK-102), so we need a way to distinguish between them
-- Allow user to specify "target" page (i.e. not restricted Hitler)
+- Use `argparse` package to parse arguments
+	- Allow user to specify "target" page (i.e. not restricted Hitler)
+	- Implement flags for switching on/off output
+
 
 ### Known bugs
 - ~~Pages with "Wikipedia:" and "Help:" being included in the outgoing link list when they shouldn't be~~
