@@ -2,20 +2,21 @@
 # Joshua Loh, Denton Phosavanh
 # 2016
 
-# Webscraping
-import urllib.request, urllib.error, urllib.parse
-from bs4 import BeautifulSoup
-from bs4 import SoupStrainer
+# Webcraping
+import urllib.request, urllib.error, urllib.parse  # Load web page
+from bs4 import BeautifulSoup   # Easier scraping
+from bs4 import SoupStrainer    # More efficient loading
 
 # Other
 import argparse
 import textwrap
 import sys
+from unidecode import unidecode # Strip diactritics from characters
 from queue import *
 
-# Takes in a list of strings, removes duplicates (and sorts)
+# Takes in a set, and returns a sorted list
 def streamline(a):
-	a = list(set(a))
+	a = list(a)
 	a.sort()
 	return a
 
@@ -33,7 +34,7 @@ def get_links(s):
 		print("An error occurred in opening this page")
 		print("This is most likely due to either of two reasons:")
 		print("a) Your internet connection isn't internetting")
-		print("b) The wikipedia page %s does not exist" % wiki)
+		print("b) The Wikipedia page %s does not exist" % wiki)
 		exit(3)
 	except Exception:
 		import traceback
@@ -43,7 +44,7 @@ def get_links(s):
 		soup = BeautifulSoup(page, "html.parser", parse_only=SoupStrainer("p"))
 
 	# Stores the name of all the outgoing Wiki pages
-	link_array = []
+	link_array = set() #  Use a set to avoid duplicate entries
 
 	# Extract every <a> that is in a <p>, store them in link_array
 	para_links = soup.find_all("a")
@@ -51,22 +52,29 @@ def get_links(s):
 		link = para_link.get("href")
 		# Only pull (relevant parts of) relevant pages
 		if link.startswith("/wiki/") and (not link[6:].startswith("Wikipedia:")) and (not link[6:].startswith("Help:")):
-			link_array.append(link[6:])
+			# Strip everything after the last `#` symbol 
+			# in the link (Wikipedia fragment identifier)
+			last_octothorpe = link.rfind('#')
+			if last_octothorpe == -1: # No octothorpe
+				link_array.add(link[6:])
+			else:
+				link_array.add(link[6:last_octothorpe])
 
-	# Return link_array
+	# Return the result.
+	# Call this if you want it sorted,
+	# otherwise just return link_array
 	return streamline(link_array)
 
 
-# Recursive DFS
+# Recursive depth-first search
 def dfs(site, depth, DEPTH_LIMIT, target, verbosity):
 	# Base cases, have reached depth limit, or found target
 	if depth >= DEPTH_LIMIT:
-		return
-	
-	# elif s == target:
-	# 	print("YEAH YEAH YEAH YEAH YEAH YEAH YEAH")
-	# 	print("Got to " + s + " at depth " + str(depth))
-	# 	exit(12)
+		return	
+	elif site == target:
+		print("Got to " + site + " at depth " + str(depth))
+		exit(12)
+		
 	global visited_links
 	visited_links.add(site)
 	indent = "\t"*depth
@@ -83,7 +91,7 @@ def dfs(site, depth, DEPTH_LIMIT, target, verbosity):
 		if not l in visited_links:
 			dfs(l, depth+1, DEPTH_LIMIT, target, verbosity)
 
-
+# Iterative breadth-first search
 def bfs(site, target, verbosity):
 	global visited_links
 	fringe = Queue()
@@ -184,6 +192,8 @@ parser = argparse_setup()
 args = parser.parse_args()
 if args.verbosity >= 1:
 	print(args)
+	
+args.start = unidecode(args.start)
 
 # Keep track of which links have been visited
 visited_links = set()

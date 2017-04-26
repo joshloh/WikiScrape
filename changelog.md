@@ -1,7 +1,7 @@
 # WikiScrape Project changelog
-- Authors: Denton Phosavanh Joshua Loh
+- Authors: Denton Phosavanh, Joshua Loh
 - For: Self-improvement
-- Latest Version: 0.3.0
+- Latest Version: 0.3.1
 ---
 ## GLOSSARY
 [x] - currently not used
@@ -11,18 +11,52 @@
 ### Things to add or change
 - Run test cases on more pages
 - Make an array of potential end cases instead of a fixed number
-- Some kind of output for BFS to see the path from start to beginning
-- Prevent the consideration of pages such as [Germant#Law](https://en.wikipedia.org/wiki/Germany#Law) and [Germany#Music](https://en.wikipedia.org/wiki/Germany#Music) as "different" pages
+- Some kind of output for the searches to see the path from start to beginning
 - Recognition of links within tables (and possibly other structures)
 	- Example: Running it on [this page](https://en.wikipedia.org/wiki/List_of_chemical_compounds_with_unusual_names) at depth 1 will only register 13 outgoing links, whereas there should be hundreds.
 	- As a side-note, we also want to avoid links in templates such as at the bottom of [this page](https://en.wikipedia.org/wiki/AK-102), so we need a way to distinguish between them
 - Use `argparse` package to parse arguments
 	- Implement flags for switching on/off output
 	- Actually make use of the verbosity flag
+- Not including any links from the `See also` area
+- I suspect we didn't implement DFS correctly. It looks like BFS right now...
+	- An example run
+		```
+		$ python3 get_links3.py -v 1 -a dfs -d 2 -s Br%C3%BCgger_%26_Thomet_GL06 -t Australia
+		Namespace(algorithm='dfs', depth=2, start='Br%C3%BCgger_%26_Thomet_GL06', target='Australia', verbosity=1)
+		Visiting: Br%C3%BCgger_%26_Thomet_GL06
+				Visiting: 40_mm_grenade
+				Visiting: Ammunition
+				Visiting: Br%C3%BCgger_%26_Thomet
+				Visiting: Grenade_launcher
+				Visiting: Heckler_%26_Koch_HK69A1
+				Visiting: M79_grenade_launcher
+				Visiting: Non-lethal_weapon
+				Visiting: Thun
+		```
+	- However, I think after `40 mm grenade`, it should go into the first link in `40 mm grenade`, not the second link in the `GL06` page (which is `Ammunition`)
+
 
 ### Known bugs
 - ~~Pages with "Wikipedia:" and "Help:" being included in the outgoing link list when they shouldn't be~~
 - ~~Pages are pre-emptively added to `visited_links` so they aren't explored properly in DFS~~
+- Unable to visit pages named similarly to `Brügger & Thomet`. Spacing and possibly the umlaut is an issue
+	- Possibly using `unidecode` library to sort out the umlaut?
+
+
+## [0.3.1] - 2017-04-26
+### Added
+- Strips everything after the last `#` character in a Wikipedia link. This addresses the item:
+	- Prevent the consideration of pages such as [Germant#Law](https://en.wikipedia.org/wiki/Germany#Law) and [Germany#Music](https://en.wikipedia.org/wiki/Germany#Music) as "different" pages
+	- However, this introduces another bug - duplicate pages in the `link_array` that gets returned from `get_links`
+- notable tests file (found in `docs/notable_tests.txt`)
+
+### Changed
+- capital 'W' for Wikipedia in the `get_links` error message
+- using a set instead of an array in `get_links`
+- changed `streamline` to therefore assume the input param is a set
+- uncommented `dfs` found exit condition
+
 
 ## [0.3.0] - 2016-12-21
 ### Added

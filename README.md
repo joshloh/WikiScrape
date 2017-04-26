@@ -6,6 +6,7 @@
 		- If using Cygwin, needs the `python-setuptools` package
 		- Install pip by running `easy_install-2.x pip` (where `2.x` is the Python2 version that is installed, or `3.x` if using `get_links3.py`)
 		- Install BeautifulSoup by running `pip install beautifulsoup4` or using `pip3`
+- unidecode
 
 ## Instructions
 - **NOTE**: `get_links3.py` is the one we're rolling with. `get_links2.py` exists, but is no longer being worked on.
@@ -16,7 +17,7 @@
 - Searches until every outgoing link from [START] until:
 	- it finds reaches the Wikipedia article for [TARGET]
 	- it reaches the [DEPTH] (if using dfs)
-	- there are no more unexplored articles to search
+	- there are no more unexplored articles to search (unreachable)
 	
 - For argument help, run `python3 get_links3.py -h`
 

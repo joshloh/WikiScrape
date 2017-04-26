@@ -1,0 +1,43 @@
+# List of notable tests and what they test for
+
+`Steyr_TMP` -> Include dot points, such as in the `Users` heading
+
+`Cardinalis` -> same, but smaller (easier to test)
+
+
+`Heckler_%26_Koch` -> Multiple links to the same page. In this case, these:
+```
+	Blowback_(arms)
+	Blowback_(arms)#Gas_delayed
+	Blowback_(arms)#Roller_delayed
+```
+Therefore can use this to test that,
+1) Everything after the `#` symbol is not considered
+2) the resulting links don't get stored multiple times (i.e. only one entry for `Blowback_(arms)`
+
+`Br%C3%BCgger_%26_Thomet_GL06` -> same, but smaller (easier to test)
+```
+	Non-lethal_weapon
+	Non-lethal_weapon#Ammunition
+```
+
+
+`Brügger_&_Thomet` (as an input) -> test to see whether it'll sort out the ampersand and the umlaut.
+```
+	$ python3 get_links3.py -v 1 -a dfs -d 1 -s Brügger_&_Thomet -t Steel
+	[1] 5400
+	bash: _Thomet: command not found
+
+	$ Namespace(algorithm='dfs', depth=1, start='Brügger_', target='Adolf_Hitler', verbosity=1)
+	Visiting: Brügger_
+```
+- Side note: I think the ampersand `&` must be escaped in the command line when entering the command
+- `python3 get_links3.py -s Brügger_\&_Thomet`
+- Using `unidecode` seems to make it work.
+
+
+`List_of_chemical_compounds_with_unusual_names` -> There are only 13 outgoing links, but there should be hundreds
+- Need to include tables in the outgoing links
+
+
+`AK-102` -> As a follow-up, want to avoid the templates at the bottom of the page.
