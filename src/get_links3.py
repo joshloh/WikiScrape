@@ -20,6 +20,20 @@ def streamline(a):
 	a.sort()
 	return a
 
+# Link should not start with any of these
+def is_actually_a_wiki_link(link):
+	bad_starts = ["Wikipedia:", "Help:", "File:", "Special:"]
+	
+	# Links to another Wikipedia page
+	if link is not None and link.startswith("/wiki/"):
+		content = link[6:]
+		
+		for item in bad_starts:
+			if content.startswith(item):
+				return False
+		return True
+	
+	return False
 
 # From a string in the form of "Wikipedia_Article_Name",
 # create the BeautifulSoup object of it, and return
@@ -51,7 +65,7 @@ def get_links(s):
 	for para_link in para_links:
 		link = para_link.get("href")
 		# Only pull (relevant parts of) relevant pages
-		if link.startswith("/wiki/") and (not link[6:].startswith("Wikipedia:")) and (not link[6:].startswith("Help:")):
+		if is_actually_a_wiki_link(link):
 			# Strip everything after the last `#` symbol 
 			# in the link (Wikipedia fragment identifier)
 			last_octothorpe = link.rfind('#')
